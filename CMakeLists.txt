@@ -12,6 +12,7 @@ add_executable(app
   src/shader.cpp
   src/mesh.cpp
   src/camera.cpp
+  src/texture.cpp
   src/glad.c
 )
 

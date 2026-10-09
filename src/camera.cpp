@@ -24,7 +24,7 @@ void Camera::processMovement(GLFWwindow *window, float &lastFrame,
   deltaTime = currentFrame - lastFrame;
   lastFrame = currentFrame;
 
-  float speed = 2.5f * deltaTime;
+  float speed = moveSpeed * deltaTime;
 
   if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
     setPos(getPos() + (speed * getFront()));
@@ -36,4 +36,11 @@ void Camera::processMovement(GLFWwindow *window, float &lastFrame,
   if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
     setPos(getPos() +
            (speed * glm::normalize(glm::cross(getFront(), getUp()))));
+
+  if (glfwGetKey(window, GLFW_KEY_SPACE) == GLFW_PRESS)
+    setPos(getPos() + speed * getUp());
+}
+
+void Camera::setMoveSpeed(const float &moveSpeed) {
+  this->moveSpeed = moveSpeed;
 }

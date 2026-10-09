@@ -22,6 +22,8 @@ public:
   float getYaw() const;
   float getPitch() const;
 
+  void setMoveSpeed(const float &moveSpeed);
+
   void processMovement(GLFWwindow *window, float &lastFrame, float &deltaTime);
 
 private:
@@ -30,4 +32,5 @@ private:
   glm::vec3 cameraFront;
   float yaw;
   float pitch = 0;
+  float moveSpeed = 2.5f;
 };

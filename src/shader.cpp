@@ -48,8 +48,6 @@ Shader::Shader(const std::string &vert_path, const std::string &frag_path) {
   glDeleteShader(fragment_shader);
 
   ID = program;
-
-  Shader::setUniformLocation();
 }
 Shader::~Shader() {
   if (ID)
@@ -58,11 +56,10 @@ Shader::~Shader() {
 
 void Shader::use() { glUseProgram(ID); }
 
-void Shader::setUniformLocation() {
-  uniforms["fillColor"] = glGetUniformLocation(ID, "fillColor");
-  uniforms["model"] = glGetUniformLocation(ID, "model");
-  uniforms["view"] = glGetUniformLocation(ID, "view");
-  uniforms["projection"] = glGetUniformLocation(ID, "projection");
+void Shader::setUniformLocation(const std::vector<std::string> &n) {
+  for (const std::string &s : n) {
+    uniforms[s] = glGetUniformLocation(ID, s.c_str());
+  }
 }
 
 int Shader::getUniformLocation(const std::string &name) {
@@ -74,8 +71,12 @@ void Shader::setMat4(const std::string &name, const glm::mat4 &value) {
                      glm::value_ptr(value));
 }
 
-void Shader::setVec3(const std::string &name, float x, float y, float z) {
-  glUniform3f(Shader::getUniformLocation(name), x, y, z);
+void Shader::setVec3(const std::string &name, const glm::vec3 &value) {
+  glUniform3fv(Shader::getUniformLocation(name), 1, glm::value_ptr(value));
+}
+
+void Shader::setInt(const std::string &name, const int value) {
+  glUniform1i(Shader::getUniformLocation(name), value);
 }
 
 unsigned int Shader::getId() const { return ID; }

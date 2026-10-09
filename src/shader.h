@@ -31,10 +31,11 @@ public:
   ~Shader();
 
   void use();
-  void setUniformLocation();
+  void setUniformLocation(const std::vector<std::string> &n);
   int getUniformLocation(const std::string &name);
   void setMat4(const std::string &name, const glm::mat4 &value);
-  void setVec3(const std::string &name, float x, float y, float z);
+  void setVec3(const std::string &name, const glm::vec3 &value);
+  void setInt(const std::string &name, const int value);
   unsigned int getId() const;
 
   void checkShaderErrors(GLuint shader, GLenum pname, GLint *success);

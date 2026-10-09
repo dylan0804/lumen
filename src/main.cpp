@@ -16,7 +16,6 @@
 #include <cstring>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
-#include <optional>
 #include <ostream>
 #include <vector>
 static void error_callback(int error, const char *description) {
